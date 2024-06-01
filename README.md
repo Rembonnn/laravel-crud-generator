@@ -67,11 +67,11 @@ php artisan crud:generate {name} {--table= : Table} {--schema= : Schema} {--form
 ```
 
 Deskripsi:
-    - `name` Nama Model
-    - `table` Nama Tabel
-    - `schema` Nama Schema, kalau ingin default schema, bisa diisi dengan value `public`
-    - `form` flag ini memiliki format tersendiri, berikut adalah contoh format pengisian value dari flag ini `row:type,row:type`
-    - `datatable` flag ini memiliki nilai boolean 0 mewakili `false` dan 1 mewakili `true`
+- `name` Nama Model
+- `table` Nama Tabel
+- `schema` Nama Schema, kalau ingin default schema, bisa diisi dengan value `public`
+- `form` flag ini memiliki format tersendiri, berikut adalah contoh format pengisian value dari flag ini `row:type,row:type`
+- `datatable` flag ini memiliki nilai boolean 0 mewakili `false` dan 1 mewakili `true`
 
 ### Lewat Halaman CRUD Generator
 silahkan kunjungi route berikut: /crud
