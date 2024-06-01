@@ -12,10 +12,69 @@ Laravel CRUD Generator adalah alat yang kuat dan fleksibel yang dirancang untuk 
 - **Dokumentasi Komprehensif**: Dokumentasi dan contoh yang terperinci untuk membantu Anda memulai dengan cepat dan memaksimalkan penggunaan paket.
 
 ## Installation
+Untuk menginstal paket Laravel CRUD Generator, jalankan perintah berikut:
+
+```sh
+composer require rembon/laravel-crud-generator
+```
+
+setelah package sukses terinstall, perlu dilakukan registrasi service provider dan publishing asset, maka silahkan jalankan perintah berikut:
+
+```sh
+php artisan vendor:publish --tag=public
+```
+
+```sh
+php artisan vendor:publish --tag=stubs
+```
+
+daftarkan service provider pada file `config/app.php`
+
+```php
+'providers' => [
+    /*
+    * Laravel Framework Service Providers...
+    */
+    ...
+
+    /*
+    * Package Service Providers...
+    */
+    \Rembon\LaravelCrudGenerator\LaravelCrudGeneratorServiceProvider::class,
+
+    /*
+    * Application Service Providers...
+    */
+    ...
+],
+```
+
+terakhir jalankan `optional`:
+```sh
+php artisan composer:dump-autoload
+```
+
+```sh
+php artisan optimize:clear
+```
 
 ## How to Use
+terdapat 2 cara dalam menggunakan package ini
 
-## Examples
+### Lewat Terminal
+```sh
+php artisan crud:generate {name} {--table= : Table} {--schema= : Schema} {--form= : Form} {--datatable= : Table}
+```
+
+Deskripsi:
+    - `name` Nama Model
+    - `table` Nama Tabel
+    - `schema` Nama Schema, kalau ingin default schema, bisa diisi dengan value `public`
+    - `form` flag ini memiliki format tersendiri, berikut adalah contoh format pengisian value dari flag ini `row:type,row:type`
+    - `datatable` flag ini memiliki nilai boolean 0 mewakili `false` dan 1 mewakili `true`
+
+### Lewat Halaman CRUD Generator
+silahkan kunjungi route berikut: /crud
 
 ## Credits
 - [Rembon Karya Digital](https://github.com/rembonnn)

@@ -61,12 +61,12 @@
                                         <option value="file">File</option>
                                     </select>
                                 </td>
-                                {{-- <td>
+                                <td>
                                     <select name="tables[]" class="form-control">
                                         <option value="1">Ya</option>
                                         <option value="0">Tidak</option>
                                     </select>
-                                </td> --}}
+                                </td>
                                 <td>
                                     <a href="#" onclick="hapus(0);return false;" class="btn btn-danger">Delete</a>
                                 </td>
