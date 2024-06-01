@@ -3,6 +3,7 @@
 namespace Rembon\LaravelCrudGenerator;
 
 use Illuminate\Support\ServiceProvider;
+use Rembon\LaravelCrudGenerator\Console\Commands\CrudGeneratorCommand;
 
 class LaravelCrudGeneratorServiceProvider extends ServiceProvider
 {
@@ -34,5 +35,14 @@ class LaravelCrudGeneratorServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../dist/assets' => public_path('vendor/laravel-crud-generator')
         ], 'public');
+
+        // Define the path to the stubs
+        $this->publishes([
+            __DIR__ . '/../stubs' => base_path('stubs/vendor/laravel-crud-generator'),
+        ], 'stubs');
+
+        $this->commands([
+            CrudGeneratorCommand::class,
+        ]);
     }
 }

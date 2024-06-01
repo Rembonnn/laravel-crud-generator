@@ -5,6 +5,7 @@ namespace Rembon\LaravelCrudGenerator\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Artisan;
 
 class CrudGeneratorController extends Controller
@@ -17,12 +18,17 @@ class CrudGeneratorController extends Controller
         return view('crud-generator::form');
     }
 
-    public function store(Request $request){
+    /**
+     * @return RedirectResponse
+     */
+    public function store(Request $request): RedirectResponse
+    {
         $table = $request->table;
         $model = $request->model;
-        $schema = $request->schema;
+        $schema = $request->schema ?? 'public';
         $form = '';
         $tables = '';
+
         foreach($request->field as $key => $row){
             $type = $request->type[$key];
             $form .= $row.":".$type.",";
@@ -37,10 +43,10 @@ class CrudGeneratorController extends Controller
         Artisan::call('crud:generate '.$model.' --table='.$table.' --schema='.$schema.' --form='.$form.' --datatable='.$tables);
 
         return redirect()
-        ->route('crud.index')
-        ->with([
-            'success' => 'Crud Berhasil'
-        ]);
+            ->back()
+            ->with([
+                'success' => 'Crud Berhasil'
+            ]);
 
     }
 

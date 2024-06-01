@@ -1,0 +1,39 @@
+
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class {{modelName}} extends Model
+{
+    /**
+     * @var string
+     */
+    protected $table = '{{table}}';
+
+    /**
+     * @var array
+     */
+    protected $fillable = [{{fillable}}];
+
+    /**
+     * @var string
+     */
+    protected $primaryKey = '{{primaryKey}}';
+
+    /**
+     * @var string
+     */
+    protected $keyType = 'string';
+
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
+     * @var array
+     */
+    static $rules = [{{rules}}];
+}

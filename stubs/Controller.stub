@@ -1,0 +1,134 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\{{modelName}};
+use Yajra\DataTables\Facades\DataTables;
+class {{modelName}}Controller extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        return view('{{schema}}.{{modelNameSingular}}.index');
+    }
+
+    public function data(){
+        return DataTables::of({{modelName}}::get())->addIndexColumn()
+        ->addColumn('action', function($result){
+            $actionEdit = route('{{modelNameSingular}}.edit',$result->{{primary}});
+            $actionDel = route('{{modelNameSingular}}.delete',$result->{{primary}});
+            $actionBtn = '<a href="'.$actionEdit.'" class="btn btn-success btn-sm">Edit</a>
+            <a  onclick="confirmation(event)" href="'.$actionDel.'" class="btn btn-danger btn-sm">Delete</a>';
+            return $actionBtn;
+        })
+        ->rawColumns(['action'])
+        ->toJson();
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        ${{modelNameSingular}} = new {{modelName}}();
+        $data["page"] = "Add New {{modelName}}";
+        $data["method"] = "POST";
+        $data["action"] = route('{{modelNameSingular}}.store');
+        return view('{{schema}}.{{modelNameSingular}}.form',compact('data','{{modelNameSingular}}'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $input = $request->all();
+         {{uploadFile}}
+        ${{modelNamePlural}} = {{modelName}}::create($input);
+
+        if(${{modelNamePlural}}){
+            return redirect()
+            ->route('{{modelNameSingular}}.index')
+            ->with([
+                'success' => 'Add New Data Success'
+            ]);
+        }else{
+            return redirect()
+            ->back()
+            ->withInput()
+            ->with([
+                'error' => 'Add New Data Failed'
+            ]);
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        ${{modelNameSingular}} = {{modelName}}::find($id);
+        $data["page"] = "Edit Data {{modelName}}";
+        $data["method"] = "PUT";
+        $data["action"] = route('{{modelNameSingular}}.update',$id);
+       return view('{{schema}}.{{modelNameSingular}}.form',compact('data','{{modelNameSingular}}'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        ${{modelNameSingular}} = {{modelName}}::find($id);
+        $input = $request->all();
+         {{uploadFileUpdate}}
+        ${{modelNamePlural}} = ${{modelNameSingular}}->update($input);
+        if(${{modelNamePlural}}){
+            return redirect()
+            ->route('{{modelNameSingular}}.index')
+            ->with([
+                'success' => 'Update Data Berhasil'
+            ]);
+        }else{
+            return redirect()
+            ->back()
+            ->withInput()
+            ->with([
+                'error' => 'Update Data Gagal'
+            ]);
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        ${{modelNamePlural}} = {{modelName}}::where("{{primary}}",$id)->delete();
+        if(${{modelNamePlural}}){
+            return redirect()
+            ->route('{{modelNameSingular}}.index')
+            ->with([
+                'success' => 'Hapus Data Berhasil'
+            ]);
+        }else{
+            return redirect()
+            ->back()
+            ->withInput()
+            ->with([
+                'error' => 'Hapus Data Gagal'
+            ]);
+        }
+    }
+}

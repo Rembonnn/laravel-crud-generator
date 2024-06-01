@@ -100,16 +100,13 @@
                         </i>
                     </div>
                     <div class="d-flex align-items-center justify-content-between product-offcanvas">
-                        <div class="breadcrumb-title border-end me-3 pe-3 d-none d-xl-block">
-                            <small class="mb-0 text-capitalize">{{ config('app.name') }}</small>
-                        </div>
                         <div class="offcanvas offcanvas-end shadow-none iq-product-menu-responsive" tabindex="-1"
                             id="offcanvasBottom">
                             <div class="offcanvas-body">
                                 <ul class="iq-nav-menu list-unstyled">
                                     <li class="nav-item active">
                                         <a target="_blank" class="nav-link menu-arrow justify-content-start"
-                                            href="{{ url('/admin/presensi/add/#') }}" role="button"
+                                            href="{{ route('crud.form') }}" role="button"
                                             aria-expanded="false" aria-controls="homeData">
                                             <svg class="icon-20" width="20" viewBox="0 0 24 24"
                                                 fill="currentColor" xmlns="https://www.w3.org/2000/svg">
@@ -117,7 +114,7 @@
                                                     d="M9.14373 20.7821V17.7152C9.14372 16.9381 9.77567 16.3067 10.5584 16.3018H13.4326C14.2189 16.3018 14.8563 16.9346 14.8563 17.7152V20.7732C14.8562 21.4473 15.404 21.9951 16.0829 22H18.0438C18.9596 22.0023 19.8388 21.6428 20.4872 21.0007C21.1356 20.3586 21.5 19.4868 21.5 18.5775V9.86585C21.5 9.13139 21.1721 8.43471 20.6046 7.9635L13.943 2.67427C12.7785 1.74912 11.1154 1.77901 9.98539 2.74538L3.46701 7.9635C2.87274 8.42082 2.51755 9.11956 2.5 9.86585V18.5686C2.5 20.4637 4.04738 22 5.95617 22H7.87229C8.19917 22.0023 8.51349 21.8751 8.74547 21.6464C8.97746 21.4178 9.10793 21.1067 9.10792 20.7821H9.14373Z"
                                                     fill="currentColor" />
                                             </svg>
-                                            <span class="nav-text ms-2">Display</span>
+                                            <span class="nav-text ms-2">CRUD Generator</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -135,102 +132,6 @@
                             </span>
                         </button>
                     </div>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="mb-2 navbar-nav ms-auto align-items-center navbar-list mb-lg-0">
-                            <li class="nav-item dropdown me-0 me-xl-3">
-                                <div class="d-flex align-items-center mr-2 iq-font-style" role="group"
-                                    aria-label="First group" data-setting="radio">
-                                    <input type="radio" class="btn-check" name="theme_font_size"
-                                        value="theme-fs-sm" id="font-size-sm">
-                                    <label for="font-size-sm" class="btn btn-border border-0 btn-icon btn-sm"
-                                        data-bs-toggle="tooltip" title="Font size 14px" data-bs-placement="bottom">
-                                        <span class="mb-0 h6" style="color: inherit !important;">A</span>
-                                    </label>
-                                    <input type="radio" class="btn-check" name="theme_font_size"
-                                        value="theme-fs-md" id="font-size-md">
-                                    <label for="font-size-md" class="btn btn-border border-0 btn-icon"
-                                        data-bs-toggle="tooltip" title="Font size 16px" data-bs-placement="bottom">
-                                        <span class="mb-0 h4" style="color: inherit !important;">A</span>
-                                    </label>
-                                    <input type="radio" class="btn-check" name="theme_font_size"
-                                        value="theme-fs-lg" id="font-size-lg">
-                                    <label for="font-size-lg" class="btn btn-border border-0 btn-icon"
-                                        data-bs-toggle="tooltip" title="Font size 18px" data-bs-placement="bottom">
-                                        <span class="mb-0 h2" style="color: inherit !important;">A</span>
-                                    </label>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown" id="itemdropdown1">
-                                <a class="py-0 nav-link d-flex align-items-center" href="#" id="navbarDropdown"
-                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <div class="btn btn-primary btn-icon btn-sm rounded-pill">
-                                        <span class="btn-inner">
-                                            <svg class="icon-32" width="32" viewBox="0 0 24 24" fill="none"
-                                                xmlns="https://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M11.997 15.1746C7.684 15.1746 4 15.8546 4 18.5746C4 21.2956 7.661 21.9996 11.997 21.9996C16.31 21.9996 19.994 21.3206 19.994 18.5996C19.994 15.8786 16.334 15.1746 11.997 15.1746Z"
-                                                    fill="currentColor"></path>
-                                                <path opacity="0.4"
-                                                    d="M11.9971 12.5838C14.9351 12.5838 17.2891 10.2288 17.2891 7.29176C17.2891 4.35476 14.9351 1.99976 11.9971 1.99976C9.06008 1.99976 6.70508 4.35476 6.70508 7.29176C6.70508 10.2288 9.06008 12.5838 11.9971 12.5838Z"
-                                                    fill="currentColor"></path>
-                                            </svg>
-                                        </span>
-                                    </div>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <li>
-                                        <a class="dropdown-item" href="app/user-profile.html">Profile</a>
-                                    </li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="{{ url('user/logout') }}">Logout</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item iq-full-screen d-none d-xl-block" id="fullscreen-item">
-                                <a href="#" class="nav-link" id="btnFullscreen" data-bs-toggle="dropdown">
-                                    <div class="btn btn-primary btn-icon btn-sm rounded-pill">
-                                        <span class="btn-inner">
-                                            <svg class="normal-screen icon-24" width="24" height="24"
-                                                viewBox="0 0 24 24" fill="none"
-                                                xmlns="https://www.w3.org/2000/svg">
-                                                <path d="M18.5528 5.99656L13.8595 10.8961" stroke="white"
-                                                    stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round"></path>
-                                                <path d="M14.8016 5.97618L18.5524 5.99629L18.5176 9.96906"
-                                                    stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round"></path>
-                                                <path d="M5.8574 18.896L10.5507 13.9964" stroke="white"
-                                                    stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round"></path>
-                                                <path d="M9.60852 18.9164L5.85775 18.8963L5.89258 14.9235"
-                                                    stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round"></path>
-                                            </svg>
-                                            <svg class="full-normal-screen d-none icon-24" width="24"
-                                                height="24" viewBox="0 0 24 24" fill="none"
-                                                xmlns="https://www.w3.org/2000/svg">
-                                                <path d="M13.7542 10.1932L18.1867 5.79319" stroke="white"
-                                                    stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round"></path>
-                                                <path d="M17.2976 10.212L13.7547 10.1934L13.7871 6.62518"
-                                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round"></path>
-                                                <path d="M10.4224 13.5726L5.82149 18.1398" stroke="white"
-                                                    stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round"></path>
-                                                <path d="M6.74391 13.5535L10.4209 13.5723L10.3867 17.2755"
-                                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                                    stroke-linejoin="round"></path>
-                                            </svg>
-                                        </span>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
             </nav> <!--Nav End-->
         </div>
@@ -243,154 +144,13 @@
                 <div class="right-panel">
                     ©
                     <script>
-                        2022
-                    </script> <span data-setting="app_name">2022 Hope UI</span>, Rembon
+                        2024
+                    </script> <span data-setting="app_name">2024 Rembon Digital Karya</span>
 
                 </div>
             </div>
         </footer>
     </main>
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdrop" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <form action="#" autocomplete="off">
-                        <h3 class="text-center">Sign In</h3>
-                        <p class="text-center">Sign in to stay connected</p>
-                        <div class="form-group">
-                            <label class="form-label">Email address</label>
-                            <input type="email" class="form-control mb-0" placeholder="Enter email"
-                                autocomplete="off">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Password</label>
-                            <input type="password" class="form-control mb-0" placeholder="Enter password"
-                                autocomplete="off">
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <div class="form-check d-inline-block mt-2 pt-1">
-                                <input type="checkbox" class="form-check-input" id="customCheck11">
-                                <label class="form-check-label" for="customCheck11">Remember Me</label>
-                            </div>
-                            <a href="#">Forget password</a>
-                        </div>
-                        <div class="text-center pb-3">
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Sign in</button>
-                        </div>
-                        <p class="text-center">Or sign in with other accounts?</p>
-                        <div class="d-flex justify-content-center">
-                            <ul class="list-group list-group-horizontal list-group-flush">
-                                <li class="list-group-item border-0 pb-0">
-                                    <a href="#"><img
-                                            src="https://templates.iqonic.design/hope-ui/pro/html/assets/images/brands/fb.svg"
-                                            alt="fb" loading="lazy"></a>
-                                </li>
-                                <li class="list-group-item border-0 pb-0">
-                                    <a href="#"><img
-                                            src="https://templates.iqonic.design/hope-ui/pro/html/assets/images/brands/gm.svg"
-                                            alt="gm" loading="lazy"></a>
-                                </li>
-                                <li class="list-group-item border-0 pb-0">
-                                    <a href="#"><img
-                                            src="https://templates.iqonic.design/hope-ui/pro/html/assets/images/brands/im.svg"
-                                            alt="im" loading="lazy"></a>
-                                </li>
-                                <li class="list-group-item border-0 pb-0">
-                                    <a href="#"><img
-                                            src="https://templates.iqonic.design/hope-ui/pro/html/assets/images/brands/li.svg"
-                                            alt="li" loading="lazy"></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <p class="text-center">Don't have account?<a href="#"> Click here to sign up.</a></p>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdrop1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <form action="#">
-                        <h3 class="text-center">Sign Up</h3>
-                        <p class="text-center">Create your Hope UI account</p>
-                        <div class="d-flex justify-content-between">
-                            <div class="form-group me-3">
-                                <label class="form-label">First Name</label>
-                                <input type="text" class="form-control mb-0" placeholder="Enter First Name"
-                                    autocomplete="off">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Last Name</label>
-                                <input type="text" class="form-control mb-0" placeholder="Enter Last Name"
-                                    autocomplete="off">
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <div class="form-group me-3">
-                                <label class="form-label">Email</label>
-                                <input type="email" class="form-control mb-0" placeholder="Enter Email"
-                                    autocomplete="off">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Phone No.</label>
-                                <input type="tel" class="form-control mb-0" placeholder="Enter Phone Number"
-                                    autocomplete="off">
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <div class="form-group me-3">
-                                <label class="form-label">Password</label>
-                                <input type="password" class="form-control mb-0" placeholder="Enter Password"
-                                    autocomplete="off">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Confirm Password</label>
-                                <input type="password" class="form-control mb-0" placeholder="Enter Confirm Password"
-                                    autocomplete="off">
-                            </div>
-                        </div>
-                        <div class="text-center pb-3">
-                            <input type="checkbox" class="form-check-input" id="customCheck112">
-                            <label class="form-check-label" for="customCheck112">I agree with the terms of use</label>
-                        </div>
-                        <div class="text-center pb-3">
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Sign in</button>
-                        </div>
-                        <p class="text-center">Or sign in with other accounts?</p>
-                        <div class="d-flex justify-content-center">
-                            <ul class="list-group list-group-horizontal list-group-flush">
-                                <li class="list-group-item border-0 pb-0">
-                                    <a href="#"><img
-                                            src="https://templates.iqonic.design/hope-ui/pro/html/assets/images/brands/fb.svg"
-                                            alt="fb" loading="lazy"></a>
-                                </li>
-                                <li class="list-group-item border-0 pb-0">
-                                    <a href="#"><img
-                                            src="https://templates.iqonic.design/hope-ui/pro/html/assets/images/brands/gm.svg"
-                                            alt="gm" loading="lazy"></a>
-                                </li>
-                                <li class="list-group-item border-0 pb-0">
-                                    <a href="#"><img
-                                            src="https://templates.iqonic.design/hope-ui/pro/html/assets/images/brands/im.svg"
-                                            alt="im" loading="lazy"></a>
-                                </li>
-                                <li class="list-group-item border-0 pb-0">
-                                    <a href="#"><img
-                                            src="https://templates.iqonic.design/hope-ui/pro/html/assets/images/brands/li.svg"
-                                            alt="li" loading="lazy"></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <p class="text-center">Already have an Account<a href="#">Sign in</a></p>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Library Bundle Script -->
     <script src="{{ asset('vendor/laravel-crud-generator/js/core/libs.min.js') }}"></script>
