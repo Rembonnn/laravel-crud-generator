@@ -11,6 +11,9 @@ Laravel CRUD Generator adalah alat yang kuat dan fleksibel yang dirancang untuk 
 - **Konfigurasi yang Ramah Pengguna**: Opsi konfigurasi sederhana memungkinkan Anda menyesuaikan proses generasi sesuai kebutuhan Anda.
 - **Dokumentasi Komprehensif**: Dokumentasi dan contoh yang terperinci untuk membantu Anda memulai dengan cepat dan memaksimalkan penggunaan paket.
 
+## Connection Support
+- PostgreSQL `pgsql`
+
 ## Installation
 Untuk menginstal paket Laravel CRUD Generator, jalankan perintah berikut:
 
@@ -47,6 +50,16 @@ php artisan vendor:publish --tag=public
 
 ```sh
 php artisan vendor:publish --tag=stubs
+```
+
+apabila anda menginstall fresh laravel project, jangan lupa untuk mengisi value file `.env`
+```php
+DB_CONNECTION=pgsql
+DB_HOST=
+DB_PORT=
+DB_DATABASE=
+DB_USERNAME=
+DB_PASSWORD=
 ```
 
 terakhir jalankan `optional`:
