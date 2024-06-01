@@ -20,14 +20,6 @@ composer require rembon/laravel-crud-generator
 
 setelah package sukses terinstall, perlu dilakukan registrasi service provider dan publishing asset, maka silahkan jalankan perintah berikut:
 
-```sh
-php artisan vendor:publish --tag=public
-```
-
-```sh
-php artisan vendor:publish --tag=stubs
-```
-
 daftarkan service provider pada file `config/app.php`
 
 ```php
@@ -47,6 +39,14 @@ daftarkan service provider pada file `config/app.php`
     */
     ...
 ],
+```
+
+```sh
+php artisan vendor:publish --tag=public
+```
+
+```sh
+php artisan vendor:publish --tag=stubs
 ```
 
 terakhir jalankan `optional`:
