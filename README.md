@@ -25,3 +25,4 @@ Laravel CRUD Generator adalah alat yang kuat dan fleksibel yang dirancang untuk 
 - [See All Contributors](https://github.com/rembonnn/sync-collection/contributors)
 
 ## Contribution
+- Untuk Panduan Kontribusi Silahkan Kunjungi Tautan ini, [klik disini](https://github.com/Rembonnn/laravel-crud-generator/blob/master/contribution-guide.md)
