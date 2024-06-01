@@ -70,7 +70,7 @@ Deskripsi:
 - `name` Nama Model
 - `table` Nama Tabel
 - `schema` Nama Schema, kalau ingin default schema, bisa diisi dengan value `public`
-- `form` flag ini memiliki format tersendiri, berikut adalah contoh format pengisian value dari flag ini `row:type,row:type`
+- `form` flag ini memiliki format tersendiri, berikut adalah contoh format `row:type,row:type`
 - `datatable` flag ini memiliki nilai boolean 0 mewakili `false` dan 1 mewakili `true`
 
 ### Lewat Halaman CRUD Generator
