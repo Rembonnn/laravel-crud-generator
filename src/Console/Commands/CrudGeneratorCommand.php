@@ -9,7 +9,7 @@ class CrudGeneratorCommand extends BaseCommand
     /**
      * @var string
      */
-    protected $signature = 'crud:generate {name} {--table= : Table} {--schema= : Schema} {--form= : Form} {--datatable= : Table}';
+    protected $signature = 'crud:generate {name} {--exists= : Exists} {--table= : Table} {--schema= : Schema} {--field= : Field} {--form= : Form} {--datatable= : Table}';
 
     /**
      * @var string
@@ -23,9 +23,19 @@ class CrudGeneratorCommand extends BaseCommand
     {
         $this->name = $this->argument('name');
         $this->table = $this->option('table');
+        $this->exists = $this->option('exists');
         $this->schema = $this->option('schema');
         $this->form = $this->parseColumns($this->option('form'));
+
+        if($this->option('field') != null){
+            $this->field = $this->parseField($this->option('field'));
+        }
+
         $this->datatable = $this->option('datatable');
+
+        if($this->exists == true && $this->field != null){
+            $this->migration();
+        }
 
         $this->model();
         $this->controller();

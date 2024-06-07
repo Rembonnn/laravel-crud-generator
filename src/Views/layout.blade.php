@@ -1,7 +1,5 @@
 <html lang="en" dir="ltr">
 
-<!-- Mirrored from templates.iqonic.design/hope-ui/pro/html/dashboard/alternate-dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 31 Aug 2023 12:46:28 GMT -->
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -10,6 +8,7 @@
     <meta name="keywords" content="Laravel Crud Generator">
     <meta name="author" content="Aang Wiadi">
     <meta name="DC.title" content="Laravel Crud Generator">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Google Font Api KEY-->
     <meta name="google_font_api" content="AIzaSyBG58yNdAjc20_8jAvLNSVi9E4Xhwjau_k">
     <!-- Config Options -->

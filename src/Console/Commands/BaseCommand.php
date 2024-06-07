@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Artisan;
 
 class BaseCommand extends Command
 {
@@ -46,6 +47,16 @@ class BaseCommand extends Command
     protected $datatable = null;
 
     /**
+     * @var bool
+     */
+    protected $exists = null;
+
+    /**
+     * @var ?string|array
+     */
+    protected $field = null;
+
+    /**
      * @var ?string|array
      */
     protected $unwantedColumns = [
@@ -66,12 +77,44 @@ class BaseCommand extends Command
     protected function route(): void
     {
         $controller =  "\App\Http\Controllers\\" . $this->name . "Controller::class";
-        //exec("php artisan make:export ".$this->name."Export --model=".$this->name);
         $lower_name = strtolower($this->name);
+
         File::append(base_path('routes/web.php'), "\nRoute::get('$lower_name/list', [$controller,'data'])->name('$lower_name.list');");
         File::append(base_path('routes/web.php'), "\nRoute::get('$lower_name/delete/{id}', [$controller,'destroy'])->name('$lower_name.delete');");
         File::append(base_path('routes/web.php'), "\nRoute::resource('$lower_name', $controller);");
         File::append(base_path('routes/web.php'), "\n");
+    }
+
+    public function parseField($columns): array
+    {
+        $arr = [];
+
+        if($columns != ''){
+            $data = explode(',', $columns);
+            foreach($data as $row) {
+                $field = "";
+                $type = "";
+
+                if (!empty($field)) {
+                    $field = explode(':',$row)[0];
+                }
+
+                if (!empty($type)) {
+                    $type = explode(':',$row)[1];
+                }
+
+                $size = !empty(explode(':',$row)[2])
+                    ? explode(':', $row)[2]
+                    : ($type == 'uuid' ? 200 : 11);
+                $nullable = !empty(explode(':',$row)[3])
+                    ? explode(':', $row)[3]
+                    : false;
+
+                $arr[] = ["field"=>$field,"type"=>$type,"size"=>$size,"nullable"=>$nullable];
+            }
+        }
+
+        return $arr;
     }
 
     /**
@@ -157,8 +200,6 @@ class BaseCommand extends Command
             File::makeDirectory($path, $mode = 0777, true, true);
         }
 
-        //exec("php artisan make:view $view.index");
-        //$this->createDir($path);
         $viewTemplate = str_replace(
             [
                 '{{modelName}}',
@@ -178,6 +219,66 @@ class BaseCommand extends Command
         );
 
         file_put_contents(resource_path("/views/" . $schema . "/" . $view . "/index.blade.php"), $viewTemplate);
+    }
+
+    /**
+     * @return void
+     */
+    protected function migration(): void
+    {
+        $fields = '';
+        foreach ($this->field as $row) {
+            $field = $row['field'];
+            $type = $row['type'];
+            $size = isset($row['size']) ? $row['size'] : null;
+            $nullable = isset($row['nullable']) && $row['nullable'] ? '->nullable()' : '';
+
+            if ($type == 'uuid') {
+                $fields .= "\$table->uuid('$field')$nullable;\n";
+            } elseif ($type == 'date') {
+                $fields .= "\$table->date('$field')$nullable;\n";
+            } elseif ($type == 'timestamp') {
+                $fields .= "\$table->timestamp('$field')$nullable;\n";
+            } elseif ($type == 'string') {
+                $fields .= "\$table->string('$field'";
+                if ($size) {
+                    $fields .= ", $size";
+                }
+                $fields .= ")$nullable;\n";
+            } elseif ($type == 'integer') {
+                $fields .= "\$table->integer('$field'";
+                if ($size) {
+                    $fields .= ", $size";
+                }
+                $fields .= ")$nullable;\n";
+            } elseif ($type == 'float') {
+                $fields .= "\$table->float('$field'";
+                if ($size) {
+                    $fields .= ", $size";
+                }
+                $fields .= ")$nullable;\n";
+            } elseif ($type == 'increments') {
+                $fields .= "\$table->increments('$field');\n";
+            }
+        }
+
+        $migrations = str_replace(
+            [
+                '{{table}}',
+                '{{field}}',
+            ],
+            [
+                strtolower($this->table),
+                $fields,
+            ],
+            $this->getStub('Migration')
+        );
+
+        $fileName = date('Y_m_d_His') . '_create_' . strtolower($this->table) . '_table.php';
+
+        file_put_contents(base_path("/database/migrations/" . $fileName), $migrations);
+
+        Artisan::call('migrate --path=database/migrations/' . $fileName);
     }
 
     /**
@@ -255,15 +356,27 @@ class BaseCommand extends Command
      * @param ?string $columns
      * @return array
      */
-    public function parseColumns(?string $columns): array
+    public function parseColumns(?string $columns)
     {
         $arr = [];
+
         if ($columns != '') {
             $data = explode(',', $columns);
-            foreach ($data as $row) {
-                $label = explode(':', $row)[0];
-                $type = explode(':', $row)[1];
-                $arr[] = ["label" => $label, "type" => $type];
+            foreach ($data as $key => $row) {
+
+                if (isset(explode(':', $row)[0]) && isset(explode(':', $row)[1])) {
+                    $label = explode(':',$row)[0];
+                    $type = explode(':',$row)[1];
+
+                    if ($type == "select") {
+                        $model = explode(':',$row)[2];
+                        $value = explode(':',$row)[3];
+                        $option = explode(':',$row)[4];
+                        $arr[] = ["label"=>$label,"type"=>$type,"model"=>$model,"value"=>$value,"option"=>$option];
+                    } else {
+                        $arr[] = ["label"=>$label,"type"=>$type];
+                    }
+                }
             }
         }
 
